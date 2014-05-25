@@ -41,7 +41,7 @@ The VM consists of the following registers to keep track of execution:
 * SETLOCAL _i_ _j_ - set the value of the _j_th binding in the _i_th frame of the environment to the value on the top of the stack.
 * SETGLOBAL _i_ - set the global defined by the _i_th constant to have the value on the top of the stack. An error is the global is not yet set.
 
-globals themselves should be defined in namespace. This makes it a non-instruction, but rather an attribute on a code object. Or: the final frame?
+globals themselves should be defined in namespaces. This makes it a non-instruction, but rather an attribute on a code object. Or: the final frame?
 	!! would be nice to simply treat globals as the outermost frame. Could extract from the env.
 	!! a REPL would want to define things in that top level environment, including compiling code. Hmm. Maybe
 	-> big performance boost to have that top frame accessible. It is like "extern", needed for "free variables". Like system functions.
