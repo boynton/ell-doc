@@ -123,11 +123,7 @@ The execution is as follows:
       * `(callcc` _fun_`)` - capture the current continuation and call the function with it as a n argument
 
    * The set of valid expressions can be extended with macros, which expand into primitive forms
-   * All other Lists are interpreted as function calls. The first element is the function, applied to the remaining elements (arguments). The resulting value is the result of the function call.	Functions may be part of the basic environment (primitives - usually defined in the underlying implementation language), or the result of a lambda expression. Also, vectors, maps, and keywords are executable:
-
-      * `(`_vector_ _index_`)` - looks up an element of a vector with the specified index
-      * `(`_map_ _key_`)` - looks up a value in a struct for the given key.
-      * `(`_keyword_ _map_`)` - looks up the value in a map for the given keyword, i.e. `
+   * All other Lists are interpreted as function calls. The first element is the function, applied to the remaining elements (arguments). The resulting value is the result of the function call.	Functions may be part of the basic environment (primitives - usually defined in the underlying implementation language), or the result of a lambda expression.
 
 ## Core functions
 
