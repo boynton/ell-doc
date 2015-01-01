@@ -78,12 +78,19 @@ In addition to traditional Scheme-style lambda definitions, with explicit argume
 	= (1 23 2)
 	? (f 1 z: 2 y: 3)               
 	= (1 3 2)
+
+
+Also like Scheme, some of these forms can be simplified for top level definitions:
+
+	? (define (f x y) (list x y))
+	= <function of 2 arguments>
+	? (f 1 2)
+	= (1 2)
 	? (define (f x . y) (list x y))                                 
 	= <function of 1 or more arguments>
 	? (f 1 2)                                                       
 	= (1 (2))
 
-Also like Scheme, some of these forms can be simplified for top level definitions:
 
 ## Execution
 
