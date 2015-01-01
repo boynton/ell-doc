@@ -114,40 +114,39 @@ The execution is as follows:
    * Symbols are used to look up values in the current lexical environment (variable references)
    * Lists are interpreted as function calls. The primitive expressions are:
 
-      * `(lambda _args_ _expr_ _expr_ ...)` - returns a lambda expression closed over the current lexical environment
-      * `(quote _datum_)` - the data value is taken literally
-      * `(begin _expr_ _expr_ ...)` - the expressions are evaluated sequentially
-      * `(if _cond_ _consequent_ _antecedent_)` - the _cond is evaluated, if true the the consequent is evaluated, else the antecedent
-      * `(define _symbol_ _expr_)` - the expression is evaluated, and the result is assigned to the symbol in the current environment's scope
-      * `(set! _symbol_ _expr_)` - the expression is evaluated, and the result is assigned to the already-defined symbol in the current environment
+      * `(lambda` _args_ _expr_ _expr_ ...`)` - returns a lambda expression closed over the current lexical environment
+      * `(quote` _datum_`)` - the data value is taken literally
+      * `(begin` _expr_ _expr_ ...`)` - the expressions are evaluated sequentially
+      * `(if` _cond_ _consequent_ _antecedent_`)` - the _cond is evaluated, if true the the consequent is evaluated, else the antecedent
+      * `(define` _symbol_ _expr_`)` - the expression is evaluated, and the result is assigned to the symbol in the current environment's scope
+      * `(set!` _symbol_ _expr_`)` - the expression is evaluated, and the result is assigned to the already-defined symbol in the current environment
+      * `(callcc` _fun_`)` - capture the current continuation and call the function with it as a n argument
+
    * The set of valid expressions can be extended with macros, which expand into primitive forms
    * All other Lists are interpreted as function calls. The first element is the function, applied to the remaining elements (arguments). The resulting value is the result of the function call.	Functions may be part of the basic environment (primitives - usually defined in the underlying implementation language), or the result of a lambda expression. Also, vectors, maps, and keywords are executable:
 
-      * `(_vector_ _index_)` - looks up an element of a vector with the specified index
-      * `(_map_ _key_)` - looks up a value in a struct for the given key.
-      * `(_keyword_ _map_)` - looks up the value in a map for the given keyword, i.e. `
+      * `(`_vector_ _index_`)` - looks up an element of a vector with the specified index
+      * `(`_map_ _key_`)` - looks up a value in a struct for the given key.
+      * `(`_keyword_ _map_`)` - looks up the value in a map for the given keyword, i.e. `
 
 ## Core functions
 
-   * `(quasiquote _expr_)` - the expression is quoted, but allowing unquote and unquote-splicing to occur within. Typically bound to the "`" reader macro.
-   * `(unquote _expr)` - unquotes the expression within a quasiquote
-   * `(unquote-splicing _expr)` - unquotes the expression within a quasiquote and splices it as a list into the current quasiquoted expression
-   * `(macro args . body)` - creates a macro, which can be bound with define, i.e. (define defn (macro (name args . body) `(define ,name ,args ,@body)))
-   * `(cons _expr1_ _expr2)` - creates a cons cell made of the 2 values
-   * `(car _pair_)` - returns the first element of a pair
-   * `(cdr _pair_)` - returns the second element of a pair
-   * `(make-vector _list_)` - returns a vector with the elements determined by the list
-   * `(make-struct _list_)` - returns a map made from the list. The list must have an even number of elements, keys and values are taken alternatively
-   * `(sequence? _expr_)` - returns true if the value implements the Sequence interface, i.e. is a list, vector, or struct
-   * `(length _sequence_)` - this counts the sequence (might be expensive!)
-   * `(first _sequence_)` - returns the first object in the sequence
-   * `(rest _sequence_)` - returns a sequence representing the rest of the sequence, or nil
-   * `(seq obj)` returns a sequence for the object, or nil if none can be created.
+   * `(quasiquote` _expr_`)` - the expression is quoted, but allowing unquote and unquote-splicing to occur within. Typically bound to the "`" reader macro.
+   * `(unquote` _expr_`)` - unquotes the expression within a quasiquote
+   * `(unquote-splicing` _expr_`)` - unquotes the expression within a quasiquote and splices it as a list into the current quasiquoted expression
+   * `(macro` args . body`)` - creates a macro, which can be bound with define, i.e. (define defn (macro (name args . body) `(define ,name ,args ,@body)))
+   * `(cons` _expr1_ _expr2_`)` - creates a cons cell made of the 2 values
+   * `(car` _pair_`)` - returns the first element of a pair
+   * `(cdr` _pair_`)` - returns the second element of a pair
+   * `(pair?` _obj_`)` - returns true if the object is a pair
+   * `(null?` _obj_`)` - returns true if the object is nil
+   * `(list?` _obj_`)` - returns true if the object is a pair or nil
+   * `(make-vector` _list_`)` - returns a vector with the elements determined by the list
+   * `(make-map` _list_`)` - returns a map made from the list. The list must have an even number of elements, keys and values are taken alternatively
 
 ## Examples
 
 The input and output in a REPL (Read-Eval-Print-Loop) session is shown. The "?" is the prompt, and if there is a result, then "=" precedes it.
-When the result is *void* (as is the case with the print function), no result is printed.
 
 ### Hello world
 
