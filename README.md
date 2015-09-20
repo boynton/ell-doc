@@ -3,8 +3,10 @@ ell
 
 ℒ (ell) is a LISP core language, with semantics similar to Scheme, but adds Keywords, Structs, and user-defined Types.
 
+It uses a syntax called [EllDN](https://github.com/boynton/elldn) that is a superset of JSON.
+
 It defines a simple Virtual Machine (VM) that is has C, Java, and Go implementations, with some plans to target
-other back ends.
+other back ends. Code can be compiled and the VM code dumped and loaded.
 
 ## Types
 
