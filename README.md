@@ -23,7 +23,7 @@ Primitive data types, which have syntax for input/input, include the following:
    * keyword - a symbolic identifier, self-evaluating, used as keys and as functions, i.e. `foo:`
    * type - a symbolic identifier representing metatype, i.e. `<foo>`
    * list - a 2-tuple of a value and another list (no dotted pairs), i.e. `(1 2 3)`
-   * array - a compact linear sequence of values with constant time random access, i.e. `[1 2 3]`
+   * vector - a compact linear sequence of values with constant time random access, i.e. `[1 2 3]`
    * struct - a collection of keys mapping to values, i.e. `{foo: 23 "bar" 57}`
    * instance - a user-typed value on any other value, i.e. `#<point>{x: 23 y: 57}`
    * null - no value, i.e. `null`
@@ -184,7 +184,7 @@ The execution is as follows:
 
    * Simple data types evaluate to themselves (null, boolean, char, number, string)
    * keywords and types evaluate to themselves
-   * Array elements get evaluated
+   * Vector elements get evaluated
    * Struct keys and values get evaluated
    * Symbols are used to look up values in the current lexical environment (variable references)
    * Lists are interpreted as function calls. The primitive expressions are:
@@ -210,8 +210,9 @@ The execution is as follows:
    * `(car` _list_`)` - returns the first element of a list
    * `(cdr` _list_`)` - returns the rest of the list
    * `(list?` _obj_`)` - returns true if the object is a list
-   * `(array` _e1_ _e2_ ...`)` - returns an array with the specified elements
+   * `(vector` _e1_ _e2_ ...`)` - returns an vector with the specified elements
    * `(struct` _k:_ _v_ ...`)` - returns a struct with the specified key//value pairs. The list must have an even number of elements, keys and values are taken alternatively. Keys are usually keywords, but can be any object
+   * `(instance` _type_ _value_ ...`)` - returns a typed value
 
 ## Examples
 
@@ -265,7 +266,7 @@ Data types all have a lexical format to specify literals:
 	? (list? '(1 2))
 	= true
 	? (type [1 2 3])
-	= <array>
+	= <vector>
 	? (equal? [1 2 3] [1, 2, 3]) ; commas are whitespace, this makes it JSON compatible
 	= true
 	? (type {x: 23 y: 57}) ; map with symbols as keys
